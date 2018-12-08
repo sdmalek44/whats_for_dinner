@@ -1,11 +1,11 @@
 class YummlyService
 
   def initialize(params)
-    @params = create_search_params(params)
+    @params = params
   end
 
   def recipes
-    @recipes ||= get_json("#{api_auth}&#{course}&#{keyword}&#{allergies}&#{result_num(10)}")
+    @recipes ||= get_json("/v1/api/recipes?#{api_auth}&#{course}&#{keyword}&#{allergies}&#{cook_time_seconds}&#{result_num(10)}")
   end
 
   def api_auth
@@ -21,19 +21,23 @@ class YummlyService
   end
 
   def keyword
-    "q=#{params[:keyword]}"
+    "q=#{search_params[:keyword]}"
   end
 
   def allergies
-    params[:allergies].inject("") do |acc, allergy|
-      acc += "allowedAllergy[]=#{allergy_code}&" if allergy_code = allergy_map[allergy.downcase]
+    allergies_params.inject("") do |acc, allergy|
+      if allergy_code = allergy_map[allergy.downcase]
+        acc += "allowedAllergy[]=#{allergy_code}&"
+      end
       acc
     end[0...-1]
   end
 
-  def
+  def cook_time_seconds
+    "maxTotalTimeInSeconds=#{search_params[:max_cook_time].to_i * 60}"
+  end
 
-  def allery_map
+  def allergy_map
     {
       "wheat" => "392^Wheat-Free",
       "gluten" => "393^Gluten-Free",
@@ -49,6 +53,7 @@ class YummlyService
   end
 
   def get_json(url)
+    binding.pry
     JSON.parse(conn.get(url), symbolize_names: true)
   end
 
@@ -56,8 +61,12 @@ class YummlyService
 
   attr_reader :params
 
-  def create_search_params(params)
-    params.permit(:keyword, :allergies, :max_cook_time)
+  def search_params
+    params.permit(:keyword, :max_cook_time)
+  end
+
+  def allergies_params
+    params.require(:allergies)
   end
 
   def conn

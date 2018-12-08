@@ -11,7 +11,7 @@ describe 'POST /users/:token/searches' do
     }
 
     body = {
-      keyword: "example@example.example",
+      keyword: "onions",
       allergies: ['peanut', 'dairy'],
       max_cook_time: '15'
     }
