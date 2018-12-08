@@ -9,7 +9,7 @@ class CreateSearchSerializer
   end
 
   def body
-    recipes
+    recipe
   end
 
   def status

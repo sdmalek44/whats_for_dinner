@@ -5,7 +5,7 @@ class YummlyService
   end
 
   def recipes
-    @recipes ||= get_json("/v1/api/recipes?#{api_auth}&#{course}&#{keyword}&#{allergies}&#{cook_time_seconds}&#{result_num(10)}")
+    @recipes ||= get_json("/v1/api/recipes?#{api_auth}&#{course}&#{keyword}&#{allergies}&#{cook_time_seconds}&#{result_num(5)}")
   end
 
   def api_auth
@@ -53,8 +53,7 @@ class YummlyService
   end
 
   def get_json(url)
-    binding.pry
-    JSON.parse(conn.get(url), symbolize_names: true)
+    JSON.parse(conn.get(url).body, symbolize_names: true)
   end
 
   private
@@ -72,6 +71,7 @@ class YummlyService
   def conn
     @conn ||= Faraday.new('https://api.yummly.com') do |faraday|
       faraday.adapter Faraday.default_adapter
+      faraday.headers['Content-Type'] = 'application/json'
     end
   end
 

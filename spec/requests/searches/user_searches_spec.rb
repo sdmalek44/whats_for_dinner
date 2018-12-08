@@ -21,7 +21,7 @@ describe 'POST /users/:token/searches' do
     recipes = JSON.parse(response.body, symbolize_names: true)
     recipe = recipes.first
 
-    expect(recipes.length).to eq(10)
+    expect(recipes.length).to eq(5)
     expect(recipe).to have_key(:name)
     expect(recipe).to have_key(:image)
     expect(recipe).to have_key(:ingredients)
