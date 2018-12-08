@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'relationships' do
-
+    it {should have_many :user_searches}
+    it {should have_many :searches}
   end
 end
