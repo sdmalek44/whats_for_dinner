@@ -21,20 +21,24 @@ class YummlyService
   end
 
   def keyword
-    "q=#{search_params[:keyword]}"
+    "q=#{search_params[:keyword]}" if search_params[:keyword]
   end
 
   def allergies
-    allergies_params.inject("") do |acc, allergy|
-      if allergy_code = allergy_map[allergy.downcase]
-        acc += "allowedAllergy[]=#{allergy_code}&"
-      end
-      acc
-    end[0...-1]
+    if validate_allergies
+      allergies_params.inject("") do |acc, allergy|
+        if allergy_code = allergy_map[allergy.downcase]
+          acc += "allowedAllergy[]=#{allergy_code}&"
+        end
+        acc
+      end[0...-1]
+    end
   end
 
   def cook_time_seconds
-    "maxTotalTimeInSeconds=#{search_params[:max_cook_time].to_i * 60}"
+    if search_params[:max_cook_time]
+      "maxTotalTimeInSeconds=#{search_params[:max_cook_time].to_i * 60}"
+    end
   end
 
   def allergy_map
@@ -66,6 +70,10 @@ class YummlyService
 
   def allergies_params
     params.require(:allergies)
+  end
+
+  def validate_allergies
+    params[:allergies] && params[:allergies].class == Array
   end
 
   def conn
