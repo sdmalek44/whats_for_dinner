@@ -5,7 +5,7 @@ class YummlyService
   end
 
   def recipes
-    @recipes ||= get_json("/v1/api/recipes?#{api_auth}&#{course}&#{keyword}&#{allergies}&#{cook_time_seconds}&#{result_num(5)}")
+    @recipes ||= get_json("/v1/api/recipes?#{api_auth}&#{course}&#{keyword}&#{allergies}&#{cook_time_seconds}&#{result_num(10)}")[:matches]
   end
 
   def api_auth
