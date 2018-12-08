@@ -11,12 +11,12 @@ describe 'POST /users/:token/searches' do
     }
 
     body = {
-      key_word: "example@example.example",
+      keyword: "example@example.example",
       allergies: ['peanut', 'dairy'],
       max_cook_time: '15'
     }
 
-    post "/api/v1/user/#{user.token}", params: body.to_json, headers: headers
+    post "/api/v1/users/#{user.token}/searches", params: body.to_json, headers: headers
 
     recipes = JSON.parse(response.body, symbolize_names: true)
     recipe = recipes.first
