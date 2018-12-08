@@ -1,24 +1,59 @@
-# README
+# WhatsForDinner API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Endpoints
 
-Things you may want to cover:
+- [Users](#Users)
+- [Login](#Login)
 
-* Ruby version
+## Users
 
-* System dependencies
+#### POST /api/v1/users
 
-* Configuration
+- creates a new user and returns the users email and auth token
+- returns 400 if user already exists or incomplete payload
 
-* Database creation
+Submit following json payload in body of request:
 
-* Database initialization
+```json
+{
+  "user": {
+    "email": "bobjones@email.com",
+    "password": "bobbytime"
+  }
+}
+```
 
-* How to run the test suite
+Will receive following json:
 
-* Services (job queues, cache servers, search engines, etc.)
+```json
+{
+  "email": "bobjones@email.com",
+  "token": "talskdjfieoi23jljlk4j5kl4kjl"
+}
+```
 
-* Deployment instructions
+## Login
 
-* ...
+#### POST /api/v1/login
+
+- Authenticates the user and returns users email and authentication token
+- Will respond with 400 if password is incorrect or user not found
+  Submit following JSON in body of request:
+
+```json
+{
+  "user": {
+    "email": "bobjones@email.com",
+    "password": "bobbytime"
+  }
+}
+```
+
+Will return in body of response:
+
+```json
+{
+  "email": "bobjones@email.com",
+  "token": "talskdjfieoi23jljlk4j5kl4kjl"
+}
+```
