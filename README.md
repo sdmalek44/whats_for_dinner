@@ -4,7 +4,7 @@
 
 - [Users](#Users)
 - [Login](#Login)
-- [User Search](#UserSearch)
+- [User Search](#User_Search)
 
 ## Users
 
@@ -59,7 +59,7 @@ Will return in body of response:
 }
 ```
 
-## UserSearch
+## User_Search
 
 #### POST /api/v1/users/:token/searches
 
