@@ -1,5 +1,5 @@
 class YummlyService < YummlyQueryBuilder
-
+  
   def initialize(params)
     super(params)
   end

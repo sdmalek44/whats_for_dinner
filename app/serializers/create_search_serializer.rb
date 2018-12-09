@@ -43,12 +43,20 @@ class CreateSearchSerializer
 
   def create_search
     if user
-      search = user.searches.create(keyword: service.keyword, allergies: service.allergies, max_time: service.cook_time_seconds)
+      search = user.searches.create(create_search_params)
     end
     search.save
   end
 
   private
+
+  def create_search_params
+    {keyword: service.params[:keyword], allergies: allergy_params, max_time: service.params[:max_cook_time]}
+  end
+
+  def allergy_params
+    service.params[:allergies].join(', ') if service.params[:allergies]
+  end
 
   attr_reader :service
 end

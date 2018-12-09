@@ -1,8 +1,10 @@
 class YummlyQueryBuilder
-
+  attr_reader :params
+  
   def initialize(params)
     @params = params
   end
+
   def result_num(num)
     "maxResult=#{num}&start=#{num}"
   end
@@ -52,8 +54,6 @@ class YummlyQueryBuilder
   end
 
   private
-  
-  attr_reader :params
 
   def search_params
     params.permit(:keyword, :max_cook_time)
