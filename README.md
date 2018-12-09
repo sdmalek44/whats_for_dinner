@@ -5,7 +5,7 @@
 - [Users](#Users)
 - [Login](#Login)
 - [Searches](#Searches)
-- [Recipe](#Recipe)
+- [Recipe](#Recipes)
 
 ## Users
 
@@ -127,7 +127,7 @@ Example JSON response:
 ]
 ```
 
-##Recipe
+## Recipes
 
 #### GET /api/v1/recipes/:recipe_id
 
