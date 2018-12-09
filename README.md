@@ -4,7 +4,8 @@
 
 - [Users](#Users)
 - [Login](#Login)
-- [User Search](#User_Search)
+- [Searches](#Searches)
+- [Recipe](#Recipe)
 
 ## Users
 
@@ -60,7 +61,7 @@ Will return in body of response:
 }
 ```
 
-## User_Search
+## Searches
 
 #### POST /api/v1/users/:token/searches
 
@@ -124,4 +125,40 @@ Example JSON response:
     "keyword": "soup"
   }
 ]
+```
+
+##Recipe
+
+#### GET /api/v1/recipes/:recipe_id
+
+- Allow you to view a single recipe
+- Will return 404 if recipe not found
+
+Example request:
+
+```
+GET /api/v1/recipes/Quick-chicken-enchilada-soup-350936
+```
+
+Example JSON response:
+
+```json
+{
+  "name": "Quick Chicken Enchilada Soup",
+  "minutes": 25,
+  "servings": 4,
+  "image":
+    "http://lh4.ggpht.com/IVpIyL7sXXwoG8tl6lKKyY7vvDR7aLI4Ro40xhEwrh5EFgjk4yBXyaL0NeERBYZaPq0GfY_0cTbG_VoDW2PcTCk=s360",
+  "ingredients": [
+    "1 (15 oz) can of corn, drained",
+    "1 (15 oz) can black beans, drained and rinsed",
+    "1 14.5-ounce can diced tomatoes (I used the kind with sweet onion in it)",
+    "1 (12.5 oz) can Swanson Premium Chunk Chicken, drained and broken up",
+    "1 (10 oz) can enchilada sauce",
+    "1 (10¾ oz) can Campbell’s cream of mushroom soup",
+    "1½ cups milk (I used skim)",
+    "tortilla chips",
+    "shredded cheese"
+  ]
+}
 ```
