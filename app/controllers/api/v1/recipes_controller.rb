@@ -1,4 +1,4 @@
-class RecipesController < ApiController
+class Api::V1::RecipesController < ApiController
 
   def show
     results = ShowRecipeSerializer.new(params)
