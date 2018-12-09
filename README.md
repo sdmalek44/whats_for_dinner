@@ -59,7 +59,7 @@ Will return in body of response:
 }
 ```
 
-## User Search
+## UserSearch
 
 #### POST /api/v1/users/:token/searches
 
