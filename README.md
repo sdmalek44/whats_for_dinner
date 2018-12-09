@@ -3,7 +3,7 @@
 ## About
 
 - This is an API for an application that allows users to quickly and easily find something to make for dinner.
-- Add all [Endpoints](#Endpoints) to this base URL https://api-whats-for-dinner.herokuapp.com/
+- Add all [Endpoints](#Endpoints) to this base URL https://api-whats-for-dinner.herokuapp.com
 
 ## External APIs
 
