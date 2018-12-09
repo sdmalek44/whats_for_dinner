@@ -1,4 +1,35 @@
-# WhatsForDinner API
+# :hamburger: **WhatsForDinner API**
+
+## About
+
+- This is an API for an application that allows users to quickly and easily find something to make for dinner.
+
+## External APIs
+
+- Yummly API
+
+## Local Setup
+
+- First make sure you have Ruby version 2.4.3 and Rails 5.2.1 installed on your machine
+- `$ git clone https://github.com/sdmalek44/whats_for_dinner.git`
+- `$ cd whats_for_dinner`
+- `$ bundle install`
+- `$ figaro install`
+- Open `config/application.yml` file
+- Put the following in that file:
+
+```
+YUMMLY_ID:
+YUMMLY_KEY: 42e994cf736dd3edb35c73d4c47d26ec
+```
+
+- `$ rake db:{create,migrate}`
+- `$ rails s` to run server
+- go to [localhost:3000](https://localhost:3000/) to use API
+
+## Run Tests
+
+- `$ rspec`
 
 ## Endpoints
 
