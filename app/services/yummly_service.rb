@@ -46,7 +46,7 @@ class YummlyService
       "wheat" => "392^Wheat-Free",
       "gluten" => "393^Gluten-Free",
       "peanut" => "394^Peanut-Free",
-      "tree_nut" => "395^Tree Nut-Free",
+      "tree nut" => "395^Tree Nut-Free",
       "dairy" => "396^Dairy-Free",
       "egg" => "397^Egg-Free",
       "seafood" => "398^Seafood-Free",

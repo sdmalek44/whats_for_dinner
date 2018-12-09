@@ -15,7 +15,7 @@ class CreateSearchSerializer
     {
       name: recipe_info[:recipeName],
       recipe_id: recipe_info[:id],
-      cook_time: (recipe_info[:totalTimeInSeconds].to_i * 60),
+      cook_time: (recipe_info[:totalTimeInSeconds].to_i / 60).to_i,
       image: recipe_info[:smallImageUrls]
     }
   end
