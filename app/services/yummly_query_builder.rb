@@ -1,8 +1,12 @@
 class YummlyQueryBuilder
   attr_reader :params
-  
+
   def initialize(params)
     @params = params
+  end
+
+  def recipe_id
+    params[:recipe_id]
   end
 
   def result_num(num)
