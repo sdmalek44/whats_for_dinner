@@ -21,6 +21,7 @@ describe 'POST /api/v1/users' do
     expect(user[:email]).to eq(body[:user][:email])
     expect(user[:token]).to be_a(String)
   end
+
   it 'returns error if bad request' do
     headers = {
         "Content-Type": 'application/json',
@@ -40,4 +41,5 @@ describe 'POST /api/v1/users' do
     expect(result[:message]).to eq("Bad Request")
     expect(response).to_not be_successful
   end
+  
 end

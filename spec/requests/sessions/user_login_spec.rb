@@ -24,6 +24,7 @@ describe 'POST /api/v1/login' do
     expect(user[:email]).to eq(body[:user][:email])
     expect(user[:token]).to be_a(String)
   end
+
   it 'does not create user if password incorrect' do
     user = create(:user)
     user_token = user.token
@@ -47,6 +48,7 @@ describe 'POST /api/v1/login' do
     expect(user[:message]).to eq('Bad Request')
     expect(response).to_not be_successful
   end
+
   it 'does not create user if user doesnt exist' do
     user = create(:user)
     user_token = user.token
@@ -70,4 +72,5 @@ describe 'POST /api/v1/login' do
     expect(user[:message]).to eq('Bad Request')
     expect(response).to_not be_successful
   end
+  
 end
