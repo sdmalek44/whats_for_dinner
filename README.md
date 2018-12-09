@@ -16,11 +16,12 @@
 - `$ bundle install`
 - `$ figaro install`
 - Open `config/application.yml` file
+- Go request an api key from yummly.com
 - Put the following in that file:
 
 ```
-YUMMLY_ID:
-YUMMLY_KEY: 42e994cf736dd3edb35c73d4c47d26ec
+YUMMLY_ID: <id obtained from yummly.com>
+YUMMLY_KEY: <key obtained from yummly.com>
 ```
 
 - `$ rake db:{create,migrate}`
