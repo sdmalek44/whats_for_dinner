@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user_search do
-    user_id { nil }
-    search_id { nil }
+    user_id { 1 }
+    search_id { 1 }
   end
 end
