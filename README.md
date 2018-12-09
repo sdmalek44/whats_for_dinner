@@ -40,7 +40,7 @@ Will receive following json:
 - Authenticates the user and returns users email and authentication token
 - Will respond with 400 if password is incorrect or user not found  
 
-  Submit following JSON in body of request:
+Submit following JSON in body of request:
 
 ```json
 {
@@ -73,7 +73,7 @@ Will return in body of response:
 
   - POST /api/v1/users/leisfkdjfoisjhusdf29lk4t4k5/searches  
   
-    JSON in body:
+JSON in body:
 
 ```json
 {
