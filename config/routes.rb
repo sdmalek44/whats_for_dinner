@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post '/login', to: 'sessions#create'
       get '/users/:token/searches', to: 'users/searches#index'
       post '/users/:token/searches', to: 'users/searches#create'
+      get '/recipes/:recipe_id', to: 'recipes#show'
     end
   end
 

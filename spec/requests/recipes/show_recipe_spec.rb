@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe 'GET /api/v1/recipe/:recipe_id' do
-  it 'can get the recipe and all ingredients' do
-    get '/api/v1/recipe/Quick-chicken-enchilada-soup-350936'
+  it 'can get a single recipe and all ingredients' do
+    get '/api/v1/recipes/Quick-chicken-enchilada-soup-350936'
 
     recipe = JSON.parse(response.body, symbolize_names: true)
 
