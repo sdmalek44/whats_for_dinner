@@ -5,11 +5,11 @@
 - This is an API for an application that allows users to quickly and easily find something to make for dinner.
 - Search recipes by keyword, cook time, and common allergies.
 - Add all [Endpoints](#Endpoints) to this base URL https://api-whats-for-dinner.herokuapp.com to interact with API.
-- Explanations of each endpoint are below. 
+- Explanations of each endpoint are below.
 
 ## External APIs
 
-- Yummly API
+- [Yummly API](https://developer.yummly.com/)
 
 ## Local Setup
 
@@ -18,7 +18,7 @@
 - `$ cd whats_for_dinner`
 - `$ bundle install`
 - `$ figaro install`
-- Go request an api key from yummly.com
+- Go request an api key from [Yummly](https://developer.yummly.com/)
 - Open `config/application.yml` file
 - Put the following in that file:
 
