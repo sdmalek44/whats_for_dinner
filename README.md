@@ -4,7 +4,7 @@
 
 - [Users](#Users)
 - [Login](#Login)
-- [User Search](#User Search)
+- [User Search](#UserSearch)
 
 ## Users
 
