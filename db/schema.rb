@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2018_12_08_233621) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "searches", force: :cascade do |t|
     t.string "keyword"
     t.integer "max_time"
@@ -21,8 +24,8 @@ ActiveRecord::Schema.define(version: 2018_12_08_233621) do
   end
 
   create_table "user_searches", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "search_id"
+    t.bigint "user_id"
+    t.bigint "search_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["search_id"], name: "index_user_searches_on_search_id"
@@ -38,4 +41,6 @@ ActiveRecord::Schema.define(version: 2018_12_08_233621) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "user_searches", "searches"
+  add_foreign_key "user_searches", "users"
 end
