@@ -7,7 +7,7 @@ describe 'GET /users/:token/searches' do
     search_1 = user.searches.create(keyword: 'chicken', allergies: 'soy, dairy', max_time: 35)
     search_2 = user.searches.create(keyword: 'onion', allergies: 'soy', max_time: 15)
 
-    get "/users/#{user.token}/searches?order=newest"
+    get "/api/v1/users/#{user.token}/searches?order=newest"
 
     searches = JSON.parse(response.body, symbolize_names: true)
     search = searches.first
@@ -24,7 +24,7 @@ describe 'GET /users/:token/searches' do
     search_1 = user.searches.create(keyword: 'chicken', allergies: 'soy, dairy', max_time: 35)
     search_2 = user.searches.create(keyword: 'onion', allergies: 'soy', max_time: 15)
 
-    get "/users/#{user.token}/searches?order=newest"
+    get "/api/v1/users/#{user.token}/searches?order=oldest"
 
     searches = JSON.parse(response.body, symbolize_names: true)
     search = searches.first
