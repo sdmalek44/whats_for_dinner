@@ -5,7 +5,7 @@
 - [Users](#Users)
 - [Login](#Login)
 - [Searches](#Searches)
-- [Recipe](#Recipes)
+- [Recipes](#Recipes)
 
 ## Users
 
