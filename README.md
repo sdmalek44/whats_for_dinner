@@ -18,8 +18,8 @@
 - `$ cd whats_for_dinner`
 - `$ bundle install`
 - `$ figaro install`
-- Open `config/application.yml` file
 - Go request an api key from yummly.com
+- Open `config/application.yml` file
 - Put the following in that file:
 
 ```
