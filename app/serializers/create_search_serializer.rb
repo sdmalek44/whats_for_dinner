@@ -1,7 +1,10 @@
 class CreateSearchSerializer
+  attr_reader :status
 
   def initialize(params)
     @service = YummlyService.new(params)
+    @user_token = params[:token]
+    @status = 400
   end
 
   def recipes
@@ -18,11 +21,31 @@ class CreateSearchSerializer
   end
 
   def body
-    recipes
+    if create_search
+      success
+      recipes
+    else
+      failure
+    end
   end
 
-  def status
-    200
+  def failure
+    {message: "Incomplete parameters"}
+  end
+
+  def user
+    @user ||= User.find_by_token(@user_token)
+  end
+
+  def success
+    @status = 200
+  end
+
+  def create_search
+    if user
+      search = user.searches.create(keyword: service.keyword, allergies: service.allergies, max_time: service.cook_time_seconds)
+    end
+    search.save
   end
 
   private

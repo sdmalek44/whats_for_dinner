@@ -26,7 +26,7 @@ class YummlyService
 
   def allergies
     if validate_allergies
-      allergies_params.inject("") do |acc, allergy|
+      @allergies ||= allergies_params.inject("") do |acc, allergy|
         if allergy_code = allergy_map[allergy.downcase]
           acc += "allowedAllergy[]=#{allergy_code}&"
         end
