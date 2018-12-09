@@ -16,7 +16,7 @@ describe 'GET /users/:token/searches' do
     expect(searches.length).to eq(2)
     expect(search[:max_time]).to eq(search_2.max_time)
     expect(search[:allergies]).to eq(search_2.allergies)
-    expect(search[:max_time]).to eq(search_2.max_time)
+    expect(search[:keyword]).to eq(search_2.keyword)
   end
 
   it 'can access all users searches ordered oldest to newest' do
@@ -33,7 +33,7 @@ describe 'GET /users/:token/searches' do
     expect(searches.length).to eq(2)
     expect(search[:max_time]).to eq(search_1.max_time)
     expect(search[:allergies]).to eq(search_1.allergies)
-    expect(search[:max_time]).to eq(search_1.max_time)
+    expect(search[:keyword]).to eq(search_1.keyword)
   end
 
   it 'can access all users searches not ordered' do
@@ -50,7 +50,7 @@ describe 'GET /users/:token/searches' do
     expect(searches.length).to eq(2)
     expect(search[:max_time]).to eq(search_1.max_time)
     expect(search[:allergies]).to eq(search_1.allergies)
-    expect(search[:max_time]).to eq(search_1.max_time)
+    expect(search[:keyword]).to eq(search_1.keyword)
   end
 
   it 'returns 404 if no user found' do
