@@ -19,7 +19,7 @@
 - Put the following in that file:
 
 ```
-YUMMLY_ID: b87a521f
+YUMMLY_ID:
 YUMMLY_KEY: 42e994cf736dd3edb35c73d4c47d26ec
 ```
 
