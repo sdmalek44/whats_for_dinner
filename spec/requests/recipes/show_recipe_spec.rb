@@ -12,4 +12,13 @@ describe 'GET /api/v1/recipe/:recipe_id' do
     expect(recipe[:servings]).to eq(4)
     expect(recipe[:minutes]).to eq(25)
   end
+
+  it 'returns 404 if cant find recipe' do
+    get '/api/v1/recipes/Quick-chicken-enchilada-soup-936'
+
+    result = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response.status).to eq(404)
+    expect(result[:message]).to eq("Not Found")
+  end
 end
