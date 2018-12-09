@@ -11,7 +11,7 @@
 #### POST /api/v1/users
 
 - creates a new user and returns the users email and auth token
-- returns 400 if user already exists or incomplete payload
+- returns 400 if user already exists or incomplete payload  
 
 Submit following json payload in body of request:
 
@@ -38,7 +38,8 @@ Will receive following json:
 #### POST /api/v1/login
 
 - Authenticates the user and returns users email and authentication token
-- Will respond with 400 if password is incorrect or user not found
+- Will respond with 400 if password is incorrect or user not found  
+
   Submit following JSON in body of request:
 
 ```json
@@ -64,13 +65,14 @@ Will return in body of response:
 #### POST /api/v1/users/:token/searches
 
 - uses user auth token, search keyword, allergies, and max cook time to search for recipes
-- will save users search in database
-- will return 400 if not all parameters are given
-- possible allergies are: wheat, gluten, peanut, tree nut, dairy, egg, seafood, sesame, soy, sulfite (all lower case)
+- Will save users search in database
+- Will return 400 if not all parameters are given
+- Possible allergies are: wheat, gluten, peanut, tree nut, dairy, egg, seafood, sesame, soy, sulfite (all lower case)
 
-  example request:
+  Example request:
 
-  - POST /api/v1/users/leisfkdjfoisjhusdf29lk4t4k5/searches
+  - POST /api/v1/users/leisfkdjfoisjhusdf29lk4t4k5/searches  
+  
     JSON in body:
 
 ```json
