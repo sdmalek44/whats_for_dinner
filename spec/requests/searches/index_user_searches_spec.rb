@@ -35,4 +35,13 @@ describe 'GET /users/:token/searches' do
     expect(search[:allergies]).to eq(search_1.allergies)
     expect(search[:max_time]).to eq(search_1.max_time)
   end
+
+  it 'returns 404 if no user found' do
+    get "/api/v1/users/0980324jkjlkj/searches?order=oldest"
+
+    result = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response.status).to eq(404)
+    expect(result[:message]).to eq("Not Found")
+  end
 end
