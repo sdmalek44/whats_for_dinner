@@ -36,7 +36,7 @@ YUMMLY_KEY: 42e994cf736dd3edb35c73d4c47d26ec
 - [Users](#Users)
 - [Login](#Login)
 - [Searches](#Searches)
-- [Recipe](#Recipe)
+- [Recipes](#Recipes)
 
 ## Users
 
@@ -158,7 +158,7 @@ Example JSON response:
 ]
 ```
 
-##Recipe
+## Recipes
 
 #### GET /api/v1/recipes/:recipe_id
 
