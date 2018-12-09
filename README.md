@@ -11,7 +11,7 @@
 #### POST /api/v1/users
 
 - creates a new user and returns the users email and auth token
-- returns 400 if user already exists or incomplete payload  
+- returns 400 if user already exists or incomplete payload
 
 Submit following json payload in body of request:
 
@@ -38,7 +38,7 @@ Will receive following json:
 #### POST /api/v1/login
 
 - Authenticates the user and returns users email and authentication token
-- Will respond with 400 if password is incorrect or user not found  
+- Will respond with 400 if password is incorrect or user not found
 
 Submit following JSON in body of request:
 
@@ -71,8 +71,8 @@ Will return in body of response:
 
   Example request:
 
-  - POST /api/v1/users/leisfkdjfoisjhusdf29lk4t4k5/searches  
-  
+  - POST /api/v1/users/leisfkdjfoisjhusdf29lk4t4k5/searches
+
 JSON in body:
 
 ```json
@@ -93,6 +93,35 @@ JSON returned:
       "https://lh3.googleusercontent.com/EZIlBobdy3aVoIRSSZ-CBPqtbIXlIFNtryd510Xj7sPSZJV18-3UiopuxUSGgEy0TjieS7JCLswilDkASsx9=s90",
     "recipe_id": "Shanghai-Sliders-2017148",
     "cook_time": 35
+  }
+]
+```
+
+#### GET /api/v1/users/:token/searches
+
+- Allows you to find a users past searches
+- you can order starting with oldest, newest
+- returns 404 if user not found
+
+Example request:
+
+```
+/api/v1/users/20394jklwkj34232432/searches?order=newest
+```
+
+Example JSON response:
+
+```json
+[
+  {
+    "max_time": 35,
+    "allergies": "dairy, soy",
+    "keyword": "chicken"
+  },
+  {
+    "max_time": 15,
+    "allergies": "egg",
+    "keyword": "soup"
   }
 ]
 ```
