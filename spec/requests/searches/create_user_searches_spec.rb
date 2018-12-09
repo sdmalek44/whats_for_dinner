@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe 'POST /users/:token/searches' do
+
   it 'can create a new search and return search results' do
-    user_password = 'monkeys'
     user = create(:user)
 
     headers = {
@@ -30,7 +30,7 @@ describe 'POST /users/:token/searches' do
 
     expect(user.searches.length).to eq(1)
   end
-  
+
   it 'can create a new search and return search results' do
     user_password = 'monkeys'
     user = create(:user)
@@ -50,4 +50,5 @@ describe 'POST /users/:token/searches' do
     expect(result).to have_key(:message)
     expect(response.status).to eq(400)
   end
+
 end
