@@ -36,6 +36,23 @@ describe 'GET /users/:token/searches' do
     expect(search[:max_time]).to eq(search_1.max_time)
   end
 
+  it 'can access all users searches not ordered' do
+    user = create(:user)
+    search_1 = user.searches.create(keyword: 'chicken', allergies: 'soy, dairy', max_time: 35)
+    search_2 = user.searches.create(keyword: 'onion', allergies: 'soy', max_time: 15)
+
+    get "/api/v1/users/#{user.token}/searches"
+
+    searches = JSON.parse(response.body, symbolize_names: true)
+    search = searches.first
+
+    expect(response).to be_successful
+    expect(searches.length).to eq(2)
+    expect(search[:max_time]).to eq(search_1.max_time)
+    expect(search[:allergies]).to eq(search_1.allergies)
+    expect(search[:max_time]).to eq(search_1.max_time)
+  end
+
   it 'returns 404 if no user found' do
     get "/api/v1/users/0980324jkjlkj/searches?order=oldest"
 
