@@ -15,7 +15,7 @@ class CreateSearchSerializer
     {
       name: recipe_info[:recipeName],
       recipe_id: recipe_info[:id],
-      cook_time: (recipe_info[:totalTimeInSeconds].to_i / 60).to_i,
+      minutes: (recipe_info[:totalTimeInSeconds].to_i / 60).to_i,
       image: recipe_info[:smallImageUrls]
     }
   end
@@ -51,7 +51,7 @@ class CreateSearchSerializer
   private
 
   def create_search_params
-    {keyword: service.params[:keyword], allergies: allergy_params, max_time: service.params[:max_cook_time]}
+    {keyword: service.params[:keyword], allergies: allergy_params, max_time: service.params[:max_time]}
   end
 
   def allergy_params

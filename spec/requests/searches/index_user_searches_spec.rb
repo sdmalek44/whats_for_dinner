@@ -16,7 +16,7 @@ describe 'GET /users/:token/searches' do
       expect(response).to be_successful
       expect(searches.length).to eq(2)
       expect(search[:max_time]).to eq(search_2.max_time)
-      expect(search[:allergies]).to eq(search_2.allergies)
+      expect(search[:allergies]).to eq(search_2.allergies.split(', '))
       expect(search[:keyword]).to eq(search_2.keyword)
     end
   end
@@ -35,7 +35,7 @@ describe 'GET /users/:token/searches' do
       expect(response).to be_successful
       expect(searches.length).to eq(2)
       expect(search[:max_time]).to eq(search_1.max_time)
-      expect(search[:allergies]).to eq(search_1.allergies)
+      expect(search[:allergies]).to eq(search_1.allergies.split(', '))
       expect(search[:keyword]).to eq(search_1.keyword)
     end
   end
@@ -54,7 +54,7 @@ describe 'GET /users/:token/searches' do
       expect(response).to be_successful
       expect(searches.length).to eq(2)
       expect(search[:max_time]).to eq(search_1.max_time)
-      expect(search[:allergies]).to eq(search_1.allergies)
+      expect(search[:allergies]).to eq(search_1.allergies.split(', '))
       expect(search[:keyword]).to eq(search_1.keyword)
     end
   end

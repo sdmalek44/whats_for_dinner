@@ -14,7 +14,7 @@ describe 'POST /users/:token/searches' do
       body = {
         keyword: "onions",
         allergies: ['peanut', 'dairy'],
-        max_cook_time: '15'
+        max_time: 15
       }
 
       post "/api/v1/users/#{user.token}/searches", params: body.to_json, headers: headers
@@ -27,7 +27,7 @@ describe 'POST /users/:token/searches' do
       expect(recipe).to have_key(:name)
       expect(recipe).to have_key(:image)
       expect(recipe).to have_key(:recipe_id)
-      expect(recipe).to have_key(:cook_time)
+      expect(recipe).to have_key(:minutes)
 
       expect(user.searches.length).to eq(1)
     end
