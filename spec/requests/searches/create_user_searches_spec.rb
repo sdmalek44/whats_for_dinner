@@ -33,6 +33,41 @@ describe 'POST /users/:token/searches' do
     end
   end
 
+  it 'can search if previous same search has been made' do
+    VCR.use_cassette('create-user-search') do
+      user = create(:user)
+
+      headers = {
+          "Content-Type": 'application/json',
+          "Accept": 'application/json'
+      }
+
+      body = {
+        keyword: "onions",
+        allergies: ['peanut', 'dairy'],
+        max_time: 15
+      }
+
+      allergies = body[:allergies].join(', ')
+
+      user.searches.create(keyword: body[:keyword], allergies: allergies, max_time: body[:max_time])
+
+      post "/api/v1/users/#{user.token}/searches", params: body.to_json, headers: headers
+
+      recipes = JSON.parse(response.body, symbolize_names: true)
+      recipe = recipes.first
+
+      expect(response).to be_successful
+      expect(recipes.length).to eq(10)
+      expect(recipe).to have_key(:name)
+      expect(recipe).to have_key(:image)
+      expect(recipe).to have_key(:recipe_id)
+      expect(recipe).to have_key(:minutes)
+
+      expect(user.searches.length).to eq(1)
+    end
+  end
+
   it 'can return 400 if search invalid' do
     VCR.use_cassette('invalid-create-search') do
       user_password = 'monkeys'
