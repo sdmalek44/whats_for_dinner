@@ -103,7 +103,7 @@ Will return in body of response:
 
 - uses user auth token, search keyword, allergies, and max cook time to search for recipes
 - Will save users search in database
-- Will return 400 if not all parameters are given
+- Will return 400 if not all parameters are given or if user is not found
 - Possible allergies are: wheat, gluten, peanut, tree nut, dairy, egg, seafood, sesame, soy, sulfite (all lower case)
 
   Example request:
