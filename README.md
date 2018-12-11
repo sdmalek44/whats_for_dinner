@@ -14,14 +14,15 @@
 ## Local Setup
 
 - First make sure you have Ruby version 2.4.3 and Rails 5.2.1 installed on your machine
+- 
 - `$ git clone https://github.com/sdmalek44/whats_for_dinner.git`
 - `$ cd whats_for_dinner`
-- if you installed 2.4.3 run gem install bundler first
-- `$ bundle install`
-- `$ figaro install`
+- `$ bundle install` (if you installed 2.4.3 run gem install bundler first)
+- `$ figaro install` (should create config/application.yml file and add it to .gitignore)
 - Go request an api key from [Yummly](https://developer.yummly.com/)
-- Open `config/application.yml` file 
-- Put the following in that file:
+- Open `config/application.yml` file  
+(Open file from console if you don't see it in your file structure. Example: `$ atom config/application.yml`)
+- Put the following in your `config/application.yml` file:
 
 ```
 YUMMLY_ID: <id obtained from yummly.com>
