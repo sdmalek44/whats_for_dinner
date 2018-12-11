@@ -13,8 +13,7 @@
 
 ## Local Setup
 
-- First make sure you have Ruby version 2.4.3 and Rails 5.2.1 installed on your machine
-- 
+- Make sure you have Rails 5.2.1 and Ruby version 2.4.3 installed (use rbenv or rvm to install locally)
 - `$ git clone https://github.com/sdmalek44/whats_for_dinner.git`
 - `$ cd whats_for_dinner`
 - `$ bundle install` (if you installed 2.4.3 run gem install bundler first)
