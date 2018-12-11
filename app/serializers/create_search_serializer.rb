@@ -21,7 +21,7 @@ class CreateSearchSerializer
   end
 
   def body
-    if create_search
+    if user && create_search
       success
       recipes
     else
@@ -42,10 +42,17 @@ class CreateSearchSerializer
   end
 
   def create_search
-    if user
-      search = user.searches.create(create_search_params)
+    searches = user.searches
+    if search = searches.find_by(create_search_params)
+      create_relationship(user, search)
+    else
+      search = searches.create(create_search_params)
     end
     search.save
+  end
+
+  def create_relationship(user, search)
+    UserSearch.find_or_create_by(user_id: user.id, search_id: search.id)
   end
 
   private
