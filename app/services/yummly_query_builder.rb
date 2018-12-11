@@ -37,8 +37,8 @@ class YummlyQueryBuilder
   end
 
   def cook_time_seconds
-    if search_params[:max_cook_time]
-      "maxTotalTimeInSeconds=#{search_params[:max_cook_time].to_i * 60}"
+    if search_params[:max_time]
+      "maxTotalTimeInSeconds=#{search_params[:max_time].to_i * 60}"
     end
   end
 
@@ -60,7 +60,7 @@ class YummlyQueryBuilder
   private
 
   def search_params
-    params.permit(:keyword, :max_cook_time)
+    params.permit(:keyword, :max_time)
   end
 
   def allergies_params

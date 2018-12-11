@@ -115,7 +115,7 @@ JSON in body:
 {
   "keyword": "sliders",
   "allergies": ["peanut", "dairy"],
-  "max_cook_time": "35"
+  "max_time": 35
 }
 ```
 
@@ -128,7 +128,7 @@ JSON returned:
     "image":
       "https://lh3.googleusercontent.com/EZIlBobdy3aVoIRSSZ-CBPqtbIXlIFNtryd510Xj7sPSZJV18-3UiopuxUSGgEy0TjieS7JCLswilDkASsx9=s90",
     "recipe_id": "Shanghai-Sliders-2017148",
-    "cook_time": 35
+    "minutes": 35
   }
 ]
 ```
@@ -151,12 +151,12 @@ Example JSON response:
 [
   {
     "max_time": 35,
-    "allergies": "dairy, soy",
+    "allergies": ["dairy", "soy"],
     "keyword": "chicken"
   },
   {
     "max_time": 15,
-    "allergies": "egg",
+    "allergies": ["egg"],
     "keyword": "soup"
   }
 ]

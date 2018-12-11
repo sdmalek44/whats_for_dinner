@@ -36,7 +36,7 @@ class IndexSearchSerializer
       {
         keyword: search.keyword,
         max_time: search.max_time,
-        allergies: search.allergies
+        allergies: search.allergies.split(', ')
       }
     end
   end

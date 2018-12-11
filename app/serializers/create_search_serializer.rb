@@ -15,13 +15,13 @@ class CreateSearchSerializer
     {
       name: recipe_info[:recipeName],
       recipe_id: recipe_info[:id],
-      cook_time: (recipe_info[:totalTimeInSeconds].to_i / 60).to_i,
+      minutes: (recipe_info[:totalTimeInSeconds].to_i / 60).to_i,
       image: recipe_info[:smallImageUrls]
     }
   end
 
   def body
-    if create_search
+    if user && create_search
       success
       recipes
     else
@@ -42,16 +42,23 @@ class CreateSearchSerializer
   end
 
   def create_search
-    if user
-      search = user.searches.create(create_search_params)
+    searches = user.searches
+    if search = searches.find_by(create_search_params)
+      create_relationship(user, search)
+    else
+      search = searches.create(create_search_params)
     end
     search.save
+  end
+
+  def create_relationship(user, search)
+    UserSearch.find_or_create_by(user_id: user.id, search_id: search.id)
   end
 
   private
 
   def create_search_params
-    {keyword: service.params[:keyword], allergies: allergy_params, max_time: service.params[:max_cook_time]}
+    {keyword: service.params[:keyword], allergies: allergy_params, max_time: service.params[:max_time]}
   end
 
   def allergy_params
