@@ -3,12 +3,7 @@ class CreateSearchSerializer
 
   def initialize(params)
     @service = YummlyService.new(params)
-    @user_token = params[:token]
-    @status = 400
-  end
-
-  def recipes
-    @recipes ||= @service.recipes.map { |recipe_info| recipe(recipe_info)}
+    @user = User.find_by_token(params[:token])
   end
 
   def recipe(recipe_info)
@@ -16,39 +11,45 @@ class CreateSearchSerializer
       name: recipe_info[:recipeName],
       recipe_id: recipe_info[:id],
       minutes: (recipe_info[:totalTimeInSeconds].to_i / 60).to_i,
-      image: recipe_info[:smallImageUrls]
+      image: recipe_info[:smallImageUrls][0]
     }
   end
 
+  def recipes
+    @recipes ||= @service.recipes.map { |recipe_info| recipe(recipe_info)}
+  end
+
+  def failure
+    {message: "Bad Request"}
+  end
+
+  def create_search
+    if search = Search.find_by(create_search_params)
+      create_relationship(user, search)
+    else
+      search = user.searches.create(create_search_params)
+    end
+    search.save
+  end
+
+  def request_valid?
+    @valid ||= user && create_search
+  end
+
   def body
-    if user && create_search
-      success
+    if request_valid?
       recipes
     else
       failure
     end
   end
 
-  def failure
-    {message: "Incomplete parameters"}
-  end
-
-  def user
-    @user ||= User.find_by_token(@user_token)
-  end
-
-  def success
-    @status = 200
-  end
-
-  def create_search
-    searches = user.searches
-    if search = searches.find_by(create_search_params)
-      create_relationship(user, search)
+  def status
+    if request_valid?
+      200
     else
-      search = searches.create(create_search_params)
+      400
     end
-    search.save
   end
 
   def create_relationship(user, search)
@@ -56,6 +57,9 @@ class CreateSearchSerializer
   end
 
   private
+
+  attr_reader :service,
+              :user
 
   def create_search_params
     {keyword: service.params[:keyword], allergies: allergy_params, max_time: service.params[:max_time]}
@@ -65,5 +69,4 @@ class CreateSearchSerializer
     service.params[:allergies].join(', ') if service.params[:allergies]
   end
 
-  attr_reader :service
 end
