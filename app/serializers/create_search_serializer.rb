@@ -3,7 +3,7 @@ class CreateSearchSerializer
 
   def initialize(params)
     @service = YummlyService.new(params)
-    @user_token = params[:token]
+    @user = User.find_by_token(params[:token])
   end
 
   def recipes
@@ -62,6 +62,9 @@ class CreateSearchSerializer
 
   private
 
+  attr_reader :service,
+              :user
+
   def create_search_params
     {keyword: service.params[:keyword], allergies: allergy_params, max_time: service.params[:max_time]}
   end
@@ -70,5 +73,4 @@ class CreateSearchSerializer
     service.params[:allergies].join(', ') if service.params[:allergies]
   end
 
-  attr_reader :service
 end

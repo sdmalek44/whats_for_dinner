@@ -13,6 +13,7 @@ describe CreateSearchSerializer, type: :model do
 
     @css = CreateSearchSerializer.new(@params)
   end
+  
   context 'instance methods' do
     it 'can change a recipes keys' do
       input = {
