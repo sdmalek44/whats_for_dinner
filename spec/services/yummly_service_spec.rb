@@ -53,6 +53,11 @@ describe YummlyService, type: :model do
         expect(result).to have_key(:totalTimeInSeconds)
       end
     end
+
+    it 'can get params' do
+      expect(@ys.params).to eq(@params)
+    end
+    
   end
 
 end
