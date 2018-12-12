@@ -12,7 +12,7 @@ class CreateUserSerializer
     if user.save
       success
     else
-      error
+      failure
     end
   end
 
@@ -20,7 +20,7 @@ class CreateUserSerializer
     {email: user.email, token: user.token}
   end
 
-  def error
+  def failure
     {message: 'Bad Request'}
   end
 
