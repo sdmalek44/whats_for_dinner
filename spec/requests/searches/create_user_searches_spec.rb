@@ -85,7 +85,7 @@ describe 'POST /users/:token/searches' do
 
       result = JSON.parse(response.body, symbolize_names: true)
 
-      expect(result).to have_key(:message)
+      expect(result[:message]).to eq("Bad Request")
       expect(response.status).to eq(400)
     end
   end

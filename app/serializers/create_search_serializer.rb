@@ -4,11 +4,14 @@ class CreateSearchSerializer
   def initialize(params)
     @service = YummlyService.new(params)
     @user_token = params[:token]
-    @status = 400
   end
 
   def recipes
     @recipes ||= @service.recipes.map { |recipe_info| recipe(recipe_info)}
+  end
+
+  def failure
+    {message: "Bad Request"}
   end
 
   def recipe(recipe_info)
@@ -29,25 +32,28 @@ class CreateSearchSerializer
     search.save
   end
 
+  def request_valid?
+    @valid ||= user && create_search
+  end
+
   def body
-    if user && create_search
-      success
+    if request_valid?
       recipes
     else
       failure
     end
   end
 
-  def failure
-    {message: "Incomplete parameters"}
-  end
-
   def user
     @user ||= User.find_by_token(@user_token)
   end
 
-  def success
-    @status = 200
+  def status
+    if request_valid?
+      200
+    else
+      400
+    end
   end
 
   def create_relationship(user, search)

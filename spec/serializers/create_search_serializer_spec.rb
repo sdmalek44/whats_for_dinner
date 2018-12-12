@@ -69,5 +69,33 @@ describe CreateSearchSerializer, type: :model do
       expect(@user.searches.first).to eq(user_2.searches.first)
       expect(UserSearch.all.length).to eq(2)
     end
+
+    it 'returns body and status of request if valid' do
+      expect(@css.body[0][:name]).to eq('Asian Noodle Soup with Shrimp and Wontons')
+      expect(@css.status).to eq(200)
+    end
+
+    it 'returns bad request and 400 if invalid' do
+      params = ActionController::Parameters.new({
+        keyword: 'soup',
+        allergies: ['dairy'],
+        max_time: 25,
+        recipe_id: 'Quick-chicken-enchilada-soup-350936',
+        token: 'WRONG TOKEN'
+      })
+      css = CreateSearchSerializer.new(params)
+
+      expect(css.body[:message]).to eq('Bad Request')
+      expect(css.status).to eq(400)
+    end
+
+    it 'can create a relationship in user search table' do
+      search = create(:search)
+
+      expect(UserSearch.all.length).to eq(0)
+
+      @css.create_relationship(@user, search)
+      expect(UserSearch.all.length).to eq(1)
+    end
   end
 end
