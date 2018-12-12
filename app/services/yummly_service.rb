@@ -1,6 +1,6 @@
 class YummlyService
   include(YummlyQueryBuilder)
-  
+
   attr_reader :params
 
   def initialize(params)
