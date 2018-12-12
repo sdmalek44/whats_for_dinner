@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-describe 'Yummly Service' do
+describe YummlyService, type: :model do
   before(:each) do
-    params = ActionController::Parameters.new({
+    @params = ActionController::Parameters.new({
       keyword: 'soup',
       allergies: ['dairy'],
       max_time: 25,
       recipe_id: 'Quick-chicken-enchilada-soup-350936'
     })
 
-    @ys = YummlyService.new(params)
+    @ys = YummlyService.new(@params)
   end
 
   context 'instance methods' do
@@ -39,6 +39,20 @@ describe 'Yummly Service' do
       end
     end
 
+    it 'can make a http request and parse json' do
+      VCR.use_cassette('single-recipe-service') do
+
+        api_auth = "_app_id=#{ENV['YUMMLY_ID']}&_app_key=#{ENV['YUMMLY_KEY']}"
+        result = @ys.get_json("/v1/api/recipe/#{@params[:recipe_id]}?#{api_auth}")
+
+        expect(result).to be_a(Hash)
+        expect(result).to have_key(:name)
+        expect(result).to have_key(:images)
+        expect(result[:images][0]).to have_key(:hostedLargeUrl)
+        expect(result).to have_key(:numberOfServings)
+        expect(result).to have_key(:totalTimeInSeconds)
+      end
+    end
   end
 
 end
