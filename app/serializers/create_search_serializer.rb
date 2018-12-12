@@ -20,6 +20,16 @@ class CreateSearchSerializer
     }
   end
 
+  def create_search
+    searches = user.searches
+    if search = searches.find_by(create_search_params)
+      create_relationship(user, search)
+    else
+      search = searches.create(create_search_params)
+    end
+    search.save
+  end
+
   def body
     if user && create_search
       success
@@ -39,16 +49,6 @@ class CreateSearchSerializer
 
   def success
     @status = 200
-  end
-
-  def create_search
-    searches = user.searches
-    if search = searches.find_by(create_search_params)
-      create_relationship(user, search)
-    else
-      search = searches.create(create_search_params)
-    end
-    search.save
   end
 
   def create_relationship(user, search)

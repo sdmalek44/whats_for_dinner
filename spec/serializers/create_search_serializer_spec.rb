@@ -2,11 +2,13 @@ require 'rails_helper'
 
 describe CreateSearchSerializer, type: :model do
   before(:each) do
+    @user = create(:user)
     @params = ActionController::Parameters.new({
       keyword: 'soup',
       allergies: ['dairy'],
       max_time: 25,
-      recipe_id: 'Quick-chicken-enchilada-soup-350936'
+      recipe_id: 'Quick-chicken-enchilada-soup-350936',
+      token: @user.token
     })
 
     @css = CreateSearchSerializer.new(@params)
@@ -40,6 +42,13 @@ describe CreateSearchSerializer, type: :model do
         expect(recipe[:minutes]).to eq(15)
         expect(recipe[:image]).to eq('https://lh3.googleusercontent.com/Rl2e478Wh6_1Jiu5DBUGwiJlWdgtvtDgv_wE6vmqBN15tICwPGQHdlAniYEhVXBlUrRwsoUMnM1SVqw9mznQzGE=s90')
       end
+    end
+
+    it 'can create search in database' do
+      expect(User.first.searches.length).to eq(0)
+
+      expect(@css.create_search).to be(true)
+      expect(User.first.searches.length).to eq(1)
     end
   end
 end
