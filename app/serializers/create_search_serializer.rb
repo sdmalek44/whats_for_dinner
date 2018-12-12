@@ -6,14 +6,6 @@ class CreateSearchSerializer
     @user = User.find_by_token(params[:token])
   end
 
-  def recipes
-    @recipes ||= @service.recipes.map { |recipe_info| recipe(recipe_info)}
-  end
-
-  def failure
-    {message: "Bad Request"}
-  end
-
   def recipe(recipe_info)
     {
       name: recipe_info[:recipeName],
@@ -21,6 +13,14 @@ class CreateSearchSerializer
       minutes: (recipe_info[:totalTimeInSeconds].to_i / 60).to_i,
       image: recipe_info[:smallImageUrls][0]
     }
+  end
+
+  def recipes
+    @recipes ||= @service.recipes.map { |recipe_info| recipe(recipe_info)}
+  end
+
+  def failure
+    {message: "Bad Request"}
   end
 
   def create_search
@@ -42,10 +42,6 @@ class CreateSearchSerializer
     else
       failure
     end
-  end
-
-  def user
-    @user ||= User.find_by_token(@user_token)
   end
 
   def status

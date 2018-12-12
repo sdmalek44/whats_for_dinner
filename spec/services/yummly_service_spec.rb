@@ -57,7 +57,7 @@ describe YummlyService, type: :model do
     it 'can get params' do
       expect(@ys.params).to eq(@params)
     end
-    
+
   end
 
 end
