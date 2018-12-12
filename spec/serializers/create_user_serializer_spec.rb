@@ -34,5 +34,16 @@ describe CreateUserSerializer, type: :model do
       expect(@cus.status).to eq(200)
       expect(bad_cus.status).to eq(400)
     end
+
+    it 'can return the body of the response' do
+      body = @cus.body
+
+      response = {
+        email: @params['user']['email'],
+        token: User.first.token
+      }
+
+      expect(body).to eq(response)
+    end
   end
 end
