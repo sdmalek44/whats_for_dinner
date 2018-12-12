@@ -1,19 +1,10 @@
-class YummlyQueryBuilder
-  attr_reader :params
-
-  def initialize(params)
-    @params = params
-  end
-
-  def recipe_id
-    params[:recipe_id]
-  end
+module YummlyQueryBuilder
 
   def result_num(num)
     "maxResult=#{num}&start=#{num}"
   end
 
-  def course
+  def course_main
     "allowedCourse[]=course^course-Main%20Dishes"
   end
 
@@ -21,13 +12,13 @@ class YummlyQueryBuilder
     "_app_id=#{ENV['YUMMLY_ID']}&_app_key=#{ENV['YUMMLY_KEY']}"
   end
 
-  def keyword
-    "q=#{search_params[:keyword]}" if search_params[:keyword]
+  def keyword(k)
+    "q=#{k}" if k
   end
 
-  def allergies
-    if validate_allergies
-      @allergies ||= allergies_params.inject("") do |acc, allergy|
+  def allergies(allergies_arr)
+    if validate_allergies(allergies_arr)
+      allergies_arr.inject("") do |acc, allergy|
         if allergy_code = allergy_map[allergy.downcase]
           acc += "allowedAllergy[]=#{allergy_code}&"
         end
@@ -36,9 +27,9 @@ class YummlyQueryBuilder
     end
   end
 
-  def cook_time_seconds
-    if search_params[:max_time]
-      "maxTotalTimeInSeconds=#{search_params[:max_time].to_i * 60}"
+  def cook_time_seconds(cook_time)
+    if cook_time
+      "maxTotalTimeInSeconds=#{cook_time.to_i * 60}"
     end
   end
 
@@ -59,16 +50,8 @@ class YummlyQueryBuilder
 
   private
 
-  def search_params
-    params.permit(:keyword, :max_time)
-  end
-
-  def allergies_params
-    params.require(:allergies)
-  end
-
-  def validate_allergies
-    params[:allergies] && params[:allergies].class == Array
+  def validate_allergies(allergies)
+    allergies && allergies.class == Array
   end
 
 end
