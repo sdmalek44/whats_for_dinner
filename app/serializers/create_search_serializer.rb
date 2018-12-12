@@ -21,11 +21,10 @@ class CreateSearchSerializer
   end
 
   def create_search
-    searches = user.searches
-    if search = searches.find_by(create_search_params)
+    if search = Search.find_by(create_search_params)
       create_relationship(user, search)
     else
-      search = searches.create(create_search_params)
+      search = user.searches.create(create_search_params)
     end
     search.save
   end

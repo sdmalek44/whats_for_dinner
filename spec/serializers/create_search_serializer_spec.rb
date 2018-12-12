@@ -50,5 +50,24 @@ describe CreateSearchSerializer, type: :model do
       expect(@css.create_search).to be(true)
       expect(User.first.searches.length).to eq(1)
     end
+
+    it 'can create relationship to search if search already exists' do
+      @css.create_search
+
+      user_2 = User.create(email: 'bob@bob.bob', password: 'sand')
+      params_2 = ActionController::Parameters.new({
+        keyword: 'soup',
+        allergies: ['dairy'],
+        max_time: 25,
+        recipe_id: 'Quick-chicken-enchilada-soup-350936',
+        token: user_2.token
+      })
+
+      css_2 = CreateSearchSerializer.new(params_2)
+      css_2.create_search
+
+      expect(@user.searches.first).to eq(user_2.searches.first)
+      expect(UserSearch.all.length).to eq(2)
+    end
   end
 end
