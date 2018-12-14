@@ -18,6 +18,17 @@ describe IndexSearchSerializer, type: :model do
       expect(@iss.user).to eq(@user)
     end
 
+    it 'returns status for success or failure' do
+      expect(@iss.status).to eq(200)
+
+      params2 = ActionController::Parameters.new({
+        token: 'lklkjl',
+        order: 'newest'
+        })
+      iss2 = IndexSearchSerializer.new(params2)
+      expect(iss2.status).to eq(404)
+    end
+
     it 'can return failure' do
       expect(@iss.failure).to eq({message: "Not Found"})
     end
