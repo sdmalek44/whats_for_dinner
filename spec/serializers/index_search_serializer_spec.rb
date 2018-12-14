@@ -18,6 +18,17 @@ describe IndexSearchSerializer, type: :model do
       expect(@iss.user).to eq(@user)
     end
 
+    it 'returns status for success or failure' do
+      expect(@iss.status).to eq(200)
+
+      params2 = ActionController::Parameters.new({
+        token: 'lklkjl',
+        order: 'newest'
+        })
+      iss2 = IndexSearchSerializer.new(params2)
+      expect(iss2.status).to eq(404)
+    end
+
     it 'can return failure' do
       expect(@iss.failure).to eq({message: "Not Found"})
     end
@@ -42,6 +53,27 @@ describe IndexSearchSerializer, type: :model do
       expect(searches[0][:keyword]).to eq('soup')
       expect(searches[0][:max_time]).to eq(25)
       expect(searches[0][:allergies]).to eq(['dairy'])
+    end
+
+    it 'can serialize_searches' do
+      searches = @user.searches
+      expected = @iss.serialize_searches(searches)
+      expect(expected.length).to eq(2)
+      expect(expected[0]).to have_key(:keyword)
+      expect(expected[0]).to have_key(:max_time)
+      expect(expected[0]).to have_key(:allergies)
+    end
+
+    it 'body returns ordered_searches or failure' do
+      ordered = @iss.ordered_searches
+      expect(@iss.body).to eq(ordered)
+
+      params2 = ActionController::Parameters.new({
+        token: 'lklkjl',
+        order: 'newest'
+        })
+      iss2 = IndexSearchSerializer.new(params2)
+      expect(iss2.body).to eq({message: "Not Found"})
     end
 
   end
