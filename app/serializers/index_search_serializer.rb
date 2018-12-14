@@ -1,11 +1,9 @@
 class IndexSearchSerializer
+  attr_reader :user
 
   def initialize(params)
     @params = index_search_params(params)
-  end
-
-  def user
-    @user ||= User.find_by_token(@params[:token])
+    @user = User.find_by_token(params[:token])
   end
 
   def body

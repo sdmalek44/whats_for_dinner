@@ -10,10 +10,9 @@ describe CreateSearchSerializer, type: :model do
       recipe_id: 'Quick-chicken-enchilada-soup-350936',
       token: @user.token
     })
-
     @css = CreateSearchSerializer.new(@params)
   end
-  
+
   context 'instance methods' do
     it 'can change a recipes keys' do
       input = {
